@@ -2,4 +2,4 @@
 /vue-app/node_modules
 .vscode
 .idea
-api/.env
+/api/.env
