@@ -4,8 +4,9 @@
   "dependencies": {
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "cd vue-app & npm run serve & cd .. & node ./api/server.js",
     "build": "vue-cli-service build",
-    "backend" : "node ./api/server.js"
+    "backend" : "node ./api/server.js",
+    "setup" : "cd api & npm install & cd .. & cd vue-app & npm install"
   }
 }

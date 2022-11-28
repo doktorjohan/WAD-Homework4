@@ -11,10 +11,10 @@ Carl-Christjan Bogoslovski
 
 ## How to run
 
-Start the backend:
+Install the dependencies (there is a script for this):
 
-`npm run backend`
+`npm run setup`
 
-Start vue server:
+Start the application (also a script for this):
 
 `npm run serve`
