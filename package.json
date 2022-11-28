@@ -1,0 +1,11 @@
+{
+  "name": "wad-homework4",
+  "version": "1.0.0",
+  "dependencies": {
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "backend" : "node ./api/server.js"
+  }
+}
