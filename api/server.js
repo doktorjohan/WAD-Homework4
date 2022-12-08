@@ -1,10 +1,12 @@
 const express = require('express');
-const pool = require('./database');
 const cors = require('cors')
-const {getPosts} = require("./database");
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+
+const {addPost, addLikeToPost, getPosts, getPostById} = require("./services/postsService")
+const {getUsers, addUser} = require("./services/usersService")
+
 
 const port = process.env.PORT || 3000;
 
@@ -19,6 +21,11 @@ app.use(cookieParser());
 
 // request handling will go here
 app.get('/api/posts', getPosts)
+app.get('/api/posts/:postId', getPostById)
+app.get('/api/users', getUsers)
+app.post('/api/posts', addPost)
+app.post('/api/users', addUser)
+app.put('/api/posts/likes/:postId', addLikeToPost)
 
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
