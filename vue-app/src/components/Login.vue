@@ -1,7 +1,7 @@
 <template>
-  <div class="signup">
+  <div class="login">
     <div>
-      <form @submit.prevent="login()">
+      <form @submit.prevent="registerMe">
         <div>
           <label>Email</label>
           <input type="email" id="email" required v-model="user.email" placeholder="Email">
@@ -11,9 +11,9 @@
           <input type="Password" id="password" required v-model="user.password" placeholder="Password">
         </div>
         <div class="buttons">
-          <input class="loginButton" type="submit" @click.stop.prevent="login()" value="Log in">
+          <input class="signUpButton" type="submit" @click="LogIn" value="Login">
           <p>or</p>
-          <button class="loginButton" @click='this.$router.push("/signup")'>Signup</button>
+          <button @click='this.$router.push("/signup")' class="signUpButton">Signup</button>
         </div>
       </form>
     </div>
@@ -21,37 +21,53 @@
 </template>
 
 <script>
-import loginUser from "@/loginUser";
-
 export default {
   name: "Login",
   data() {
     return {
       user: {
-        email: "",
-        password: ""
+        password: "",
+        email: ""
       }
     }
   },
 
   methods: {
-    login() {
-      const successLogin = loginUser({"email": this.user.email, "password": this.user.password})
-      if (!successLogin){
-        alert("Incorrect email or password")
-      } else {
-        console.log("successful login")
-        //this.$router.push("/");
-        location.assign("/");
-      }
-    }
+    submit() {
+      this.$router.push("/");
+    },
+    LogIn() {
+      var data = {
+        email: this.user.email,
+        password: this.user.password
+      };
+      // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
+      fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include', //  Don't forget to specify this if you need cookies
+        body: JSON.stringify(data),
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            //this.$router.push("/");
+            location.assign("/");
+          })
+          .catch((e) => {
+            alert("Login failed")
+            console.log(e);
+            console.log("error");
+          });
+    },
   }
 }
-
 </script>
 
 <style scoped>
-.signup {
+.login {
   position: center;
   border-radius: 10px;
   background-color: #9699a1;
@@ -77,7 +93,7 @@ label {
 }
 
 
-.loginButton {
+.signUpButton {
   background-color: #4267B2;
   color: white;
   border-color: #4267B2;
@@ -90,10 +106,9 @@ label {
   cursor: pointer;
   border-radius: 10px;
 
-
 }
 
-.loginButton:hover {
+.signUpButton:hover {
   opacity: 85%;
 }
 
@@ -105,10 +120,14 @@ div form {
   margin: auto;
 }
 
+form div {
+  margin: 2px;
+  border-radius: 10px;
+  padding: 5px;
+}
 .buttons {
   display: flex;
   justify-content: center;
-  margin: 2px;
-  padding: 5px;
+
 }
 </style>
