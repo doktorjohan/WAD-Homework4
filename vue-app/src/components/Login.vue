@@ -4,17 +4,20 @@
       <form @submit.prevent="login()">
         <div>
           <label>Email</label>
-          <input type="email" id="email" v-model="user.email" placeholder="Email" required>
+          <input type="email" id="email" required v-model="user.email" placeholder="Email">
         </div>
         <div>
           <label>Password</label>
-          <input type="Password" id="password" v-model="user.password" placeholder="Password" required>
+          <input type="Password" id="password" required v-model="user.password" placeholder="Password">
         </div>
-        <input class="loginButton" type="submit" @click.stop.prevent="login()" value="Log in">
+        <div class="buttons">
+          <input class="loginButton" type="submit" @click.stop.prevent="login()" value="Log in">
+          <p>or</p>
+          <button class="loginButton" @click='this.$router.push("/signup")'>Signup</button>
+        </div>
       </form>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -25,8 +28,8 @@ export default {
   data() {
     return {
       user: {
-        "email": "",
-        "password": ""
+        email: "",
+        password: ""
       }
     }
   },
@@ -34,6 +37,13 @@ export default {
   methods: {
     login() {
       const successLogin = loginUser({"email": this.user.email, "password": this.user.password})
+      if (!successLogin){
+        alert("Incorrect email or password")
+      } else {
+        console.log("successful login")
+        //this.$router.push("/");
+        location.assign("/");
+      }
     }
   }
 }
@@ -78,6 +88,8 @@ label {
   margin: auto;
   padding: 3px;
   cursor: pointer;
+  border-radius: 10px;
+
 
 }
 
@@ -93,9 +105,10 @@ div form {
   margin: auto;
 }
 
-form input {
+.buttons {
+  display: flex;
+  justify-content: center;
   margin: 2px;
-  border-radius: 10px;
   padding: 5px;
 }
 </style>
