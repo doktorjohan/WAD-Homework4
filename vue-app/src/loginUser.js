@@ -1,17 +1,8 @@
-// wrapper for user reqistration
+// wrapper for user login
 
-/*
-
-userCredentials:
-{
-    'username': 'username',
-    'password': 'password'
-}
-
-*/
-
-export default async function signupUser(userCredentials) {
-    await fetch("http://localhost:3000/auth/signup", {
+export default async function(userCredentials) {
+    let success = false
+    await fetch("http://localhost:3000/auth/login", {
         credentials: "include",
         method: 'POST',
         headers: {
@@ -21,6 +12,7 @@ export default async function signupUser(userCredentials) {
     })
         .then((response) => response.json())
         .then((data) => {
+            success = true
             return data.userId
         })
         .catch((err) => {
