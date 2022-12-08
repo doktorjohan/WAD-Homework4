@@ -11,7 +11,7 @@
           <input type="Password" id="password" required v-model="user.password" placeholder="Password">
         </div>
         <div class="buttons">
-          <input class="signUpButton" type="submit" @click="LogIn" value="Login">
+          <input class="signUpButton" type="submit" @click="LogIn()" value="Login">
           <p>or</p>
           <button @click='this.$router.push("/signup")' class="signUpButton">Signup</button>
         </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import loginUser from "@/loginUser";
+
 export default {
   name: "Login",
   data() {
@@ -33,34 +35,17 @@ export default {
   },
 
   methods: {
-    submit() {
-      this.$router.push("/");
-    },
     LogIn() {
-      var data = {
-        email: this.user.email,
-        password: this.user.password
-      };
-      // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
-      fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: 'include', //  Don't forget to specify this if you need cookies
-        body: JSON.stringify(data),
-      })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            //this.$router.push("/");
-            location.assign("/");
-          })
-          .catch((e) => {
-            alert("Login failed")
-            console.log(e);
-            console.log("error");
-          });
+      const success = loginUser({"email": this.user.email,"password": this.user.password})
+      if (!success) {
+        alert("Incorrect email or password")
+        return false
+      } else {
+        console.log("Successful login")
+        //this.$router.push("/");
+        location.assign("/")
+
+      }
     },
   }
 }
