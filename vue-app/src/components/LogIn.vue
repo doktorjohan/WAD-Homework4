@@ -10,7 +10,11 @@
           <label>Password</label>
           <input type="Password" id="password" required v-model="user.password" placeholder="Password">
         </div>
-        <input class="signUpButton" type="submit" @click.stop.prevent="registerMe()" value="Sign up">
+        <div class="buttons">
+          <input class="signUpButton" type="submit" @click="LogIn" value="Login">
+          <p>or</p>
+          <button @click='this.$router.push("/signup")' class="signUpButton">Signup</button>
+        </div>
       </form>
     </div>
   </div>
@@ -18,7 +22,7 @@
 
 <script>
 export default {
-  name: "SignUp",
+  name: "Login",
   data() {
     return {
       user: {
@@ -30,12 +34,15 @@ export default {
 
   methods: {
     submit() {
+      this.$router.push("/");
+    },
+    LogIn() {
       var data = {
-        email: this.email,
-        password: this.password
+        email: this.user.email,
+        password: this.user.password
       };
       // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
-      fetch("http://localhost:3000/auth/signup", {
+      fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,40 +53,16 @@ export default {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            this.$router.push("/");
-            //location.assign("/");
+            //this.$router.push("/");
+            location.assign("/");
           })
           .catch((e) => {
+            alert("Login failed")
             console.log(e);
             console.log("error");
           });
     },
-
-    validatePassword(value) {
-      const containsUppercase = /[A-Z]/.test(value);
-      const containsLowercase = /[a-z]/.test(value);
-      const containsNumber = /[0-9]/.test(value);
-      const containsSpecial = /_/.test(value);
-      const startUpper = /^[A-Z]/.test(value);
-      return containsUppercase &&
-          containsLowercase &&
-          containsNumber &&
-          containsSpecial &&
-          startUpper
-    },
-
-    registerMe() {
-      if (!this.validatePassword(this.user.password)) {
-        alert("Password not valid. Password must start with an uppercase letter, " +
-            "contain at least two lowercase characters, include at least one " +
-            "numeric value, include the character '_' and start with an uppercase letter")
-        return false; // stop here if form is invalid
-      } else {
-        this.submit()
-      }
-    },
-  },
-
+  }
 }
 </script>
 
@@ -121,6 +104,7 @@ label {
   margin: auto;
   padding: 3px;
   cursor: pointer;
+  border-radius: 10px;
 
 }
 
@@ -136,9 +120,14 @@ div form {
   margin: auto;
 }
 
-form input {
+form div {
   margin: 2px;
   border-radius: 10px;
   padding: 5px;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+
 }
 </style>
