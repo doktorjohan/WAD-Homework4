@@ -4,13 +4,13 @@
 
 usercredentials:
 {
-    'username': 'username'.
+    'username': 'username',
     'password': 'password'
 }
 
 */
 
-export default async function(userCredentials) {
+export default async function signupUser(userCredentials) {
     await fetch("http://localhost:3000/auth/signup", {
         credentials: "include",
         method: 'POST',

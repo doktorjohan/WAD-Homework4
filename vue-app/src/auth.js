@@ -15,3 +15,4 @@ export default {
         return this.user.authenticated
     }
 }
+
