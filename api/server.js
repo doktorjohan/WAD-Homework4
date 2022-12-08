@@ -3,7 +3,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser');
 
 const {addPost, addLikeToPost, getPosts, getPostById} = require("./services/postsService")
-const {getUsers, addUser, getUserByUserId} = require("./services/usersService")
+const {getUsers, getUserByUserId} = require("./services/usersService")
 const {authenticateUser, logoutUser, loginUser, createNewUser} = require("./services/userAuth")
 
 

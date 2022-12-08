@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import signupUser from "@/signupUser";
+
 export default {
   name: "SignUp",
   data() {
@@ -30,29 +32,14 @@ export default {
 
   methods: {
     submit() {
-      var data = {
-        email: this.email,
-        password: this.password
-      };
-      // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
-      fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: 'include', //  Don't forget to specify this if you need cookies
-        body: JSON.stringify(data),
-      })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            this.$router.push("/");
-            //location.assign("/");
-          })
-          .catch((e) => {
-            console.log(e);
-            console.log("error");
-          });
+      const success = signupUser({"email": this.user.email,"password": this.user.password})
+      if (!success) {
+        alert("Something went wrong")
+        return false
+      } else {
+        console.log("user created success")
+        this.$router.push("/");
+      }
     },
 
     validatePassword(value) {
@@ -69,6 +56,7 @@ export default {
     },
 
     registerMe() {
+
       if (!this.validatePassword(this.user.password)) {
         alert("Password not valid. Password must start with an uppercase letter, " +
             "contain at least two lowercase characters, include at least one " +
