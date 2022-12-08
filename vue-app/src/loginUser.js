@@ -12,11 +12,11 @@ export default async function(userCredentials) {
     })
         .then((response) => response.json())
         .then((data) => {
-            success = true
-            return data.userId
+            success = data.success
         })
         .catch((err) => {
             console.log(err)
-            return err.error
+            success = false
         })
+    return success
 }

@@ -104,17 +104,17 @@ const loginUser = async(req, res) => {
         const validPassword = await bcrypt.compare(password, user.rows[0].password)
 
         if (!validPassword) {
-            return res.status(401).json({ error: "Incorrect password" })
+            return res.status(401).json({ error: "Incorrect password", success: false })
         }
 
         const token = await generateJWT(user.rows[0].id)
         res.status(201)
             .cookie("jwt")
-            .json({ userId: user.rows[0].id })
+            .json({ userId: user.rows[0].id, success: true })
             .send()
 
     } catch (err) {
-        res.status(401).json({ error: err.message })
+        res.status(401).json({ error: err.message, success: false })
     }
 }
 
