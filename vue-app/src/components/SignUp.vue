@@ -10,7 +10,7 @@
           <label>Password</label>
           <input type="Password" id="password" v-model="user.password" placeholder="Password" required>
         </div>
-        <input class="signUpButton" type="submit" @click.stop.prevent="registerMe()" value="Sign up">
+        <input class="loginButton" type="submit" @click.stop.prevent="registerMe()" value="Sign up">
       </form>
     </div>
   </div>
@@ -18,6 +18,7 @@
 
 <script>
 import signupUser from "@/signupUser";
+import loginUser from "@/loginUser";
 
 export default {
 
@@ -39,6 +40,7 @@ export default {
         return false
       } else {
         console.log("user created success")
+        loginUser({"email": this.user.email,"password": this.user.password})
         this.$router.push("/");
       }
     },
@@ -99,7 +101,7 @@ label {
 }
 
 
-.signUpButton {
+.loginButton {
   background-color: #4267B2;
   color: white;
   border-color: #4267B2;
@@ -113,7 +115,7 @@ label {
 
 }
 
-.signUpButton:hover {
+.loginButton:hover {
   opacity: 85%;
 }
 
