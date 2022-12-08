@@ -17,7 +17,10 @@
 </template>
 
 <script>
+import signupUser from "@/signupUser";
+
 export default {
+
   name: "SignUp",
   data() {
     return {
@@ -30,7 +33,14 @@ export default {
 
   methods: {
     submit() {
-      this.$router.push("/");
+      const success = signupUser({"email": this.user.email,"password": this.user.password})
+      if (!success) {
+        alert("Something went wrong")
+        return false
+      } else {
+        console.log("user created success")
+        this.$router.push("/");
+      }
     },
 
     validatePassword(value) {
