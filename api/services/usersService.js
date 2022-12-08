@@ -1,5 +1,11 @@
 const {pool} = require("../database")
 
+/**
+ * Fetches all users from the database. Used for testing purposes ONLY.
+ *
+ * GET http://localhost:3000/api/users
+ *
+ */
 const getUsers = (req, res) => {
     pool.query('SELECT * FROM USERS', (err, results) => {
         if (err) {
@@ -9,16 +15,27 @@ const getUsers = (req, res) => {
     })
 }
 
+/**
+ * GETs user from database by id defined in request parameters
+ *
+ * Example:
+ *
+ * GET http://localhost:3000/api/users/3
+ *
+ */
+const getUserByUserId = (req, res) => {
+    const userId = req.params.userId
 
-const addUser = (req, res) => {
-    const {username, password} = req.body
-    pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING username', [username, password],
-        (err, result) => {
+    pool.query('SELECT * FROM users WHERE id = $1', [userId],
+        (err, results) => {
             if (err) {
                 throw err
             }
-            res.status(201).send("created new user")
-        })
+            res.status(200).send(results["rows"])
+        }
+    )
 }
 
-module.exports = {getUsers, addUser}
+
+
+module.exports = {getUsers, getUserByUserId}
