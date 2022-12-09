@@ -5,7 +5,7 @@
       <template v-for="post in postsList" :key="post.id">
         <Post v-on:click.native="editPost" ref="p" v-bind:content="post"/>
       </template>
-      <button class="resetLikes" v-on:click="ResetLikes">Reset likes</button>
+      <button class="resetLikes" v-on:click="this.$router.push('/addPost')">Add post</button>
     </div>
     <div class="side"></div>
   </div>

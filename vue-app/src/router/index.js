@@ -4,6 +4,7 @@ import SignUpView from '../views/SignUpView.vue';
 import LoginView from "@/views/LoginView";
 import EditPostView from "@/views/EditPostView";
 import auth from "@/auth";
+import AddPostView from "@/views/AddPostView";
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path:'/editPost',
     name: 'editPost',
     component: EditPostView
+  },
+  {
+    path: '/addPost',
+    name: 'addPost',
+    component: AddPostView
   }
 ]
 
