@@ -2,6 +2,7 @@
   <div class="gridContainer">
     <div class="side"></div>
     <div id="feed">
+      <button class="logout" @click="Logout">Logout</button>
       <template v-for="post in postsList" :key="post.id">
         <Post v-on:click.native="editPost" ref="p" v-bind:content="post"/>
       </template>
@@ -37,7 +38,24 @@ export default {
       },
     editPost: function () {
       this.$router.push('/editPost')
-    }
+    },
+    Logout() {
+      fetch("http://localhost:3000/auth/logout", {
+        credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            console.log('jwt removed');
+            //console.log('jwt removed:' + auth.authenticated());
+            this.$router.push("/login");
+            //location.assign("/");
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error logout");
+          });
+    },
     },
 
 }
@@ -56,7 +74,15 @@ export default {
   width: 90%;
   margin: 10px auto;
 }
-
+.logout{
+  position: center;
+  border-radius: 10px;
+  background-color: #4267B2;
+  padding: 5px;
+  margin: auto;
+  width: auto;
+  cursor: pointer;
+}
 .side {
   background-color: #c2f8cbff;
   border-radius: 10px;
