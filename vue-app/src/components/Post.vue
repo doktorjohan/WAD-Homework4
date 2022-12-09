@@ -2,6 +2,7 @@
   <div class="post">
     <div class="postHeader">
       <img class="profilePic" src="@/assets/logo.png" alt="logo">
+      <p>{{content.userName}}</p>
       <p>{{content.createTime}}</p>
     </div>
     <div class="postBody">

@@ -32,6 +32,7 @@ export default {
 
     submitPost() {
       addNewPost({post: this.postBody})
+      this.$router.push('/')
     }
 
   }
