@@ -5,6 +5,7 @@ import LoginView from "@/views/LoginView";
 import EditPostView from "@/views/EditPostView";
 import auth from "@/auth";
 import AddPostView from "@/views/AddPostView";
+import ContactView from "@/views/ContactView";
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/addPost',
     name: 'addPost',
     component: AddPostView
+  },
+  {
+    path: '/contacts',
+    name: 'contacts',
+    component: ContactView
   }
 ]
 

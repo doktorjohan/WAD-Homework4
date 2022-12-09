@@ -2,7 +2,8 @@
   <header class="header">
     <ul class="nav">
       <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/signup">Sign up</router-link></li>
+      <li><router-link to="/login">Log in</router-link></li>
+      <li><router-link to="/contacts">Contacts</router-link></li>
     </ul>
     <div class="dropdown">
       <img src="@/assets/logo.png" v-on:click="dropDownFunction()" class="dropbtn" width="50"
