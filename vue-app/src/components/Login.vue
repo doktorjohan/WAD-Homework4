@@ -35,8 +35,8 @@ export default {
   },
 
   methods: {
-    LogIn() {
-      const success = loginUser({"email": this.user.email,"password": this.user.password})
+    async LogIn() {
+      let success = await loginUser.authenticated({"email": this.user.email, "password": this.user.password})
       if (!success) {
         alert("Incorrect email or password")
         return false
@@ -44,7 +44,6 @@ export default {
         console.log("Successful login")
         //this.$router.push("/");
         location.assign("/")
-
       }
     },
   }

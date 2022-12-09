@@ -32,13 +32,13 @@ export default {
   },
 
   methods: {
-    submit() {
-      const success = signupUser({"email": this.user.email,"password": this.user.password})
-      if (!success) {
+    async submit() {
+      const success = await signupUser.getUserId({"email": this.user.email,"password": this.user.password})
+      if (success === null) {
         alert("Something went wrong")
         return false
       } else {
-        console.log("user created success")
+        console.log("user created success" + success)
         loginUser({"email": this.user.email,"password": this.user.password})
         this.$router.push("/");
       }

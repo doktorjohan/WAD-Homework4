@@ -21,7 +21,6 @@ const authenticateUser = async (req, res) => {
     let authenticated = false;
 
     try {
-
         if (token) {
             await jwt.verify(token, secret, (err) => {
                 if (err) {
@@ -96,6 +95,7 @@ const loginUser = async(req, res) => {
 
         const { email, password } = req.body
         const user = await pool.query('SELECT * FROM users WHERE username = $1', [email])
+        console.log(user.rows[0].id)
 
         if (user.rows.length === 0) {
             return res.status(401).json({ error: "User is not registered" })
@@ -109,7 +109,7 @@ const loginUser = async(req, res) => {
 
         const token = await generateJWT(user.rows[0].id)
         res.status(201)
-            .cookie("jwt")
+            .cookie('jwt', token, {maxAge: 6000000, httpOnly: true})
             .json({ userId: user.rows[0].id, success: true })
             .send()
 

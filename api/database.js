@@ -1,12 +1,14 @@
 const Pool = require('pg').Pool;
-require('dotenv').config()
+require('dotenv').config({path: "./.env"})
 const pool = new Pool({
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    host: process.env.HOST,
-    port: process.env.DATABASE_PORT
+    user: "postgres",
+    password: "postgres",
+    database: "testWad",
+    host: "localhost",
+    port: 5432
 });
+
+console.log(process.env.USERNAME)
 
 const execute = async (query) => {
     try {

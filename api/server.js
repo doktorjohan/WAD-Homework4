@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
+
 // Fetch API in Vue needs to have credentials: include
 app.use(cors({ origin: 'http://localhost:8080' , credentials: true}));
 
