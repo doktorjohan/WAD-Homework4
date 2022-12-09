@@ -3,7 +3,7 @@
     <div class="side"></div>
     <div id="feed">
       <template v-for="post in postsList" :key="post.id">
-        <Post ref="p" v-bind:content="post"/>
+        <Post v-on:click.native="editPost" ref="p" v-bind:content="post"/>
       </template>
       <button class="resetLikes" v-on:click="ResetLikes">Reset likes</button>
     </div>
@@ -34,8 +34,12 @@ export default {
   methods: {
     ResetLikes: function () {
       this.$store.commit("resetLikes")
-      }
+      },
+    editPost: function () {
+      this.$router.push('/editPost')
     }
+    },
+
 }
 </script>
 
@@ -92,7 +96,9 @@ p ~ span {
   margin-bottom: 5px;
 
 }
-
+.post:hover{
+  cursor: pointer;
+}
 .profilePic {
   width: 25px;
   height: 25px;
