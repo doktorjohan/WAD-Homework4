@@ -88,5 +88,8 @@ footer {
 }
 img {
   border-radius: 100px;
+  width: 100px;
+  height: 100px;
+  margin: auto;
 }
 </style>
