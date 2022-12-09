@@ -1,4 +1,7 @@
 const {pool} = require("../database")
+const jwt = require("jsonwebtoken");
+
+const secret = "adgfdhgASd3453jgk246jh234jkhg234kjh346"
 
 /**
  * Get all posts from database, sorted by timestamp in descending order (the latest posts are at the top)
@@ -35,12 +38,17 @@ const getPosts = (req, res) => {
  *
  */
 const addPost = (req, res) => {
-    const {post, user, image} = req.body
-    console.log(post)
-    console.log(user)
-    console.log(image)
+    const {post} = req.body
 
-    pool.query('INSERT INTO posts (post, user_id, image_link) VALUES ($1, $2, $3) RETURNING *', [post, user, image],
+    const token = req.cookies.jwt
+    if (!token) {
+        res.sendStatus(400)
+    }
+
+    const data = jwt.verify(token, secret)
+    const user = data.id
+
+    pool.query('INSERT INTO posts (post, user_id) VALUES ($1, $2) RETURNING *', [post, user],
         (err, result) => {
             if (err) {
                 throw err

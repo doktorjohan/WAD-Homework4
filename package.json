@@ -1,12 +1,10 @@
 {
   "name": "wad-homework4",
   "version": "1.0.0",
-  "dependencies": {
-  },
   "scripts": {
     "serve": "cd vue-app & npm run serve & cd .. & node ./api/server.js",
     "build": "vue-cli-service build",
-    "backend" : "node ./api/server.js",
-    "setup" : "cd api & npm install & cd .. & cd vue-app & npm install"
+    "backend": "node ./api/server.js",
+    "setup": "cd api & npm install & cd .. & cd vue-app & npm install"
   }
 }

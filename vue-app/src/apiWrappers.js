@@ -2,9 +2,9 @@
  * Finds user by userId
  * @param userId id of the user to be fetched
  */
-export async function getUserById(userId) {
+export function getUserById(userId) {
     let returnData = {}
-    await fetch(`http://localhost:3000/api/users/:${userId}`, {
+    fetch(`http://localhost:3000/api/users/:${userId}`, {
         credentials: "include"
     })
         .then((response) => response.json())
@@ -19,7 +19,7 @@ export async function getUserById(userId) {
  * Fetches all posts from database. Posts are sorted newest at the top
  */
 export async function getAllPosts() {
-    let returnData = {}
+    let returnData = null
     await fetch("http://localhost:3000/api/posts", {
         credentials: "include"
     })
@@ -28,6 +28,7 @@ export async function getAllPosts() {
         .catch((err) => {
             console.log(err)
         })
+    console.log(returnData)
     return returnData
 }
 
@@ -35,9 +36,9 @@ export async function getAllPosts() {
  * Increases a post's like counter by 1
  * @param postId the id of the post that was liked
  */
-export async function increasePostLikes(postId) {
+export function increasePostLikes(postId) {
     let success = false
-    await fetch(`http://localhost:3000/api/posts/likes/:${postId}`, {
+     fetch(`http://localhost:3000/api/posts/likes/:${postId}`, {
         credentials: "include",
         method: "PUT",
         headers: {

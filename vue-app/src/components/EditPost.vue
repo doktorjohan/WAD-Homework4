@@ -20,7 +20,12 @@
 
 <script>
 export default {
-  name: "EditPost"
+  name: "EditPost",
+  data() {
+    return {
+      postBody: ""
+    }
+  }
 }
 </script>
 

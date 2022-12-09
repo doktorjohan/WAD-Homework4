@@ -10,7 +10,7 @@
           <input type="text" required v-model="postBody" placeholder="Post body">
         </div>
         <div class="buttons">
-          <input class="button" type="submit" value="Add">
+          <input class="button" type="submit" @click="submitPost()" value="Add">
         </div>
       </form>
     </div>
@@ -18,8 +18,23 @@
 </template>
 
 <script>
+import {addNewPost} from "@/apiWrappers";
+
 export default {
-  name: "AddPost"
+  name: "AddPost",
+
+  data() {
+    return {
+      postBody: ""
+    }
+  },
+  methods: {
+
+    submitPost() {
+      addNewPost({post: this.postBody})
+    }
+
+  }
 }
 </script>
 
