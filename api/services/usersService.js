@@ -37,3 +37,4 @@ const getUserByUserId = (req, res) => {
 }
 
 module.exports = {getUsers, getUserByUserId}
+

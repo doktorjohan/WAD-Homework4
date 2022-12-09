@@ -2,9 +2,9 @@
  * Finds user by userId
  * @param userId id of the user to be fetched
  */
-export function getUserById(userId) {
-    let returnData = {}
-    fetch(`http://localhost:3000/api/users/:${userId}`, {
+export async function getUserById(userId) {
+    let returnData = null
+    await fetch(`http://localhost:3000/api/users/${userId}`, {
         credentials: "include"
     })
         .then((response) => response.json())
@@ -12,7 +12,7 @@ export function getUserById(userId) {
         .catch((err) => {
             console.log(err)
         })
-    return returnData
+    return returnData[0]
 }
 
 /**
@@ -28,7 +28,6 @@ export async function getAllPosts() {
         .catch((err) => {
             console.log(err)
         })
-    console.log(returnData)
     return returnData
 }
 
@@ -38,7 +37,7 @@ export async function getAllPosts() {
  */
 export function increasePostLikes(postId) {
     let success = false
-     fetch(`http://localhost:3000/api/posts/likes/:${postId}`, {
+     fetch(`http://localhost:3000/api/posts/likes/${postId}`, {
         credentials: "include",
         method: "PUT",
         headers: {

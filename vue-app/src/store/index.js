@@ -1,13 +1,14 @@
 import {createStore} from 'vuex'
 import post from "@/components/Post";
-import {increasePostLikes, getAllPosts} from '@/apiWrappers'
+import {increasePostLikes, getAllPosts, getUserById} from '@/apiWrappers'
 import editPostView from "@/views/EditPostView.vue";
 
 export default createStore({
     state: {
         //postsList: []
         postsList: [
-        ]
+        ],
+        usernames: []
     },
     getters: {
 
@@ -17,7 +18,7 @@ export default createStore({
             state.postsList = postsData.map(post => {
                 return {
                     userId: post.user_id,
-                    userName: post.user_id,
+                    userName: post.username,
                     postId: post.id,
                     post: post.post,
                     image: post.image_link,
@@ -49,5 +50,6 @@ export default createStore({
             return posts
         }
     },
+
     modules: {}
 })

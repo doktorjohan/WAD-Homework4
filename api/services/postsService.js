@@ -11,11 +11,12 @@ const secret = "adgfdhgASd3453jgk246jh234jkhg234kjh346"
  * GET http://localhost:3000/api/posts
  */
 const getPosts = (req, res) => {
-    pool.query('SELECT * FROM POSTS ORDER BY created_at DESC', (err, results) => {
+    pool.query('SELECT posts.id, post, created_at, likes, users.username, image_link FROM POSTS JOIN users ON users.id = user_id' +
+        ' ORDER BY created_at DESC', (err, results) => {
         if (err) {
             throw err
         }
-        res.status(200).send(results["rows"])
+        res.status(200).send(results['rows'])
     })
 }
 
