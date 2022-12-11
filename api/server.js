@@ -34,6 +34,7 @@ app.get('/api/users/:userId', getUserByUserId)
 app.post('/api/posts', addPost)
 app.delete('/api/posts/delete', truncatePostsTable)
 app.delete('/api/posts/:postId', deletePostById)
+app.put('/api/posts/:postId')
 
 app.listen(port, () => {
     console.log("Server is listening to port " + port)

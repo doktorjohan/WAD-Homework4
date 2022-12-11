@@ -101,7 +101,7 @@ const deletePostById = (req, res) => {
 }
 
 const updatePost = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.postId;
     const post = req.body;
     console.log(id)
     console.log(post)
@@ -115,8 +115,5 @@ const updatePost = (req, res) => {
             res.status(200).send(results["rows"])
         });
 }
-
-
-
 
 module.exports = {getPosts, addPost, getPostById, truncatePostsTable, deletePostById, updatePost}
