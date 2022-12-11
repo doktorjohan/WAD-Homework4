@@ -32,7 +32,6 @@ app.get('/api/posts/:postId', getPostById)
 app.get('/api/users', getUsers)
 app.get('/api/users/:userId', getUserByUserId)
 app.post('/api/posts', addPost)
-app.put('/api/posts/likes/:postId', addLikeToPost)
 
 
 app.listen(port, () => {

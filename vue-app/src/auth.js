@@ -7,6 +7,7 @@ export default {
         await fetch("http://localhost:3000/auth/authenticate", {credentials: "include"})
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                 this.user.authenticated = data.authenticated
             })
             .catch((err) => {
@@ -15,4 +16,3 @@ export default {
         return this.user.authenticated
     }
 }
-

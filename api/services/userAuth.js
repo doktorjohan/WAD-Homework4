@@ -31,6 +31,8 @@ const authenticateUser = async (req, res) => {
                     res.send({"authenticated": authenticated})
                 }
             })
+        } else {
+            res.send({authenticated: authenticated})
         }
 
     } catch (err) {

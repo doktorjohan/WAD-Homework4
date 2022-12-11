@@ -32,30 +32,6 @@ export async function getAllPosts() {
 }
 
 /**
- * Increases a post's like counter by 1
- * @param postId the id of the post that was liked
- */
-export function increasePostLikes(postId) {
-    let success = false
-     fetch(`http://localhost:3000/api/posts/likes/${postId}`, {
-        credentials: "include",
-        method: "PUT",
-        headers: {
-            'Content-Type' : 'application/json'
-        }
-    })
-        .then((response) => {
-            if (response.status === 200) {
-                success = true
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    return success
-}
-
-/**
  *  Fetches a single post by postId
  *  @param postId the id of the post to be fetched
  */

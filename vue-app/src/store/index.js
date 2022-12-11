@@ -1,7 +1,5 @@
 import {createStore} from 'vuex'
-import post from "@/components/Post";
-import {increasePostLikes, getAllPosts, getUserById} from '@/apiWrappers'
-import editPostView from "@/views/EditPostView.vue";
+import {getAllPosts} from '@/apiWrappers'
 
 export default createStore({
     state: {
