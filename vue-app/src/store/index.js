@@ -21,23 +21,9 @@ export default createStore({
                     post: post.post,
                     image: post.image_link,
                     createTime: post.created_at,
-                    likes: post.likes
                 }
             }
         )
-        },
-        resetLikes: state => {
-            state.postsList.forEach(post => {
-                post.likes = 0;
-            })
-        },
-        increaseLike: (state, givenId) => {
-            state.postsList.forEach(post => {
-                if (post.id === givenId){
-                    post.likes +=1;
-                    increasePostLikes(givenId)
-                }
-            })
         }
     },
     actions: {
