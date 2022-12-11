@@ -59,25 +59,6 @@ const addPost = (req, res) => {
 }
 
 /**
- * Increases the likes counter of a post by 1. The post is defined in the request parameters
- * <p>
- * Example:
- * <p>
- * PUT http://localhost:3000/api/posts/likes/3
- *
- */
-const addLikeToPost = (req, res) => {
-    const postId = req.params.postId
-    pool.query('UPDATE posts SET likes = likes+1 WHERE id = $1', [postId],
-        (err, result) => {
-            if (err) {
-                throw err
-            }
-            res.status(200).send("post likes updated")
-        })
-}
-
-/**
  * GETs a post by ID specified in request parameters
  *
  * Example:
@@ -99,4 +80,13 @@ const getPostById = (req, res) => {
     )
 }
 
-module.exports = {getPosts, addLikeToPost, addPost, getPostById}
+const truncatePostsTable = (req, res) => {
+    pool.query('TRUNCATE TABLE posts', (err, results) => {
+        if (err) {
+            throw err
+        }
+        res.status(200).send("posts table cleared")
+    })
+}
+
+module.exports = {getPosts, addPost, getPostById, truncatePostsTable}
