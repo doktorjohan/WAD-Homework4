@@ -90,8 +90,8 @@ const truncatePostsTable = (req, res) => {
 }
 const deletePostById = (req, res) => {
     console.log("delete post request arrived")
-    const id = req.params.id;
-    pool.query("DELETE FROM posts WHERE id = $1 RETURNING*", [id],
+    const postId = req.params.postId;
+    pool.query("DELETE FROM posts WHERE id = $1 RETURNING*", [postId],
         (err, results) => {
         if (err) {
             throw err

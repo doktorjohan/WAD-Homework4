@@ -21,10 +21,12 @@ export default createStore({
                     post: post.post,
                     image: post.image_link,
                     createTime: post.created_at,
+                    likes: post.likes
                 }
             }
         )
-        }
+        },
+
     },
     actions: {
         async fetchPosts({commit}) {
@@ -32,7 +34,8 @@ export default createStore({
             console.log(posts)
             commit("setPostsData", posts)
             return posts
-        }
+        },
+
     },
 
     modules: {}
