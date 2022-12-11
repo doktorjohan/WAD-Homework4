@@ -12,14 +12,14 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    beforeEnter: async (to) => {
+    beforeEnter: async (to, from, next) => {
       let authResult = await auth.authenticated();
       if (!authResult) {
         console.log("redirect")
-        return '/login'
+        next('/login')
       } else {
         console.log("no redirect")
-        return "/"
+        next()
       }
     }
   },
