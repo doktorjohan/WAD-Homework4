@@ -90,8 +90,8 @@ const truncatePostsTable = (req, res) => {
 }
 const deletePostById = (req, res) => {
     console.log("delete post request arrived")
-    const id = req.params.id;
-    pool.query("DELETE FROM posts WHERE id = $1 RETURNING*", [id],
+    const postId = req.params.postId;
+    pool.query("DELETE FROM posts WHERE id = $1 RETURNING*", [postId],
         (err, results) => {
         if (err) {
             throw err
@@ -101,7 +101,7 @@ const deletePostById = (req, res) => {
 }
 
 const updatePost = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.postId;
     const post = req.body;
     console.log(id)
     console.log(post)
@@ -115,8 +115,5 @@ const updatePost = (req, res) => {
             res.status(200).send(results["rows"])
         });
 }
-
-
-
 
 module.exports = {getPosts, addPost, getPostById, truncatePostsTable, deletePostById, updatePost}
