@@ -29,10 +29,9 @@ export default {
     }
   },
   methods: {
-
     submitPost() {
       addNewPost({post: this.postBody})
-      this.$router.push('/')
+      location.assign("/")
     }
 
   }

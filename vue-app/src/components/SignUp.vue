@@ -38,9 +38,9 @@ export default {
         alert("Something went wrong")
         return false
       } else {
-        console.log("user created success" + success)
-        loginUser({"email": this.user.email,"password": this.user.password})
-        this.$router.push("/");
+        // loginUser({"email": this.user.email,"password": this.user.password})
+        location.assign("/login")
+        // this.$router.push("/");
       }
     },
 

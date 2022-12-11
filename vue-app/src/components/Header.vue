@@ -6,13 +6,13 @@
       <li><router-link to="/contacts">Contacts</router-link></li>
     </ul>
     <div class="dropdown">
-      <img src="@/assets/logo.png" v-on:click="dropDownFunction()" class="dropbtn" width="50"
+      <img src="@/assets/logo.png" class="dropbtn" width="50"
              height="50"/>
-      <div id="drop" class="dropdown-content">
-        <router-link to="/login">Log in</router-link>
-        <a href="https://www.youtube.com/watch?v=rzLIUgnKY40">DeezLouize@hot.ee</a>
-        <a href="https://www.youtube.com/watch?v=d5xPnWNVr1c">logout</a>
-      </div>
+<!--      <div id="drop" class="dropdown-content">-->
+<!--        <router-link to="/login">Log in</router-link>-->
+<!--        <a href="https://www.youtube.com/watch?v=rzLIUgnKY40">DeezLouize@hot.ee</a>-->
+<!--        <a href="https://www.youtube.com/watch?v=d5xPnWNVr1c">logout</a>-->
+<!--      </div>-->
     </div>
   </header>
 
@@ -135,13 +135,12 @@ a {
   padding: 16px;
   font-size: 16px;
   border: none;
-  cursor: pointer;
 }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
+/*.dropbtn:hover, .dropbtn:focus {*/
+/*  background-color: #2980B9;*/
+/*}*/
 
 .show {
   display: block;

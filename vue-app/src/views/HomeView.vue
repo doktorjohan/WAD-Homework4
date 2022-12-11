@@ -8,7 +8,10 @@
 <!--        <Post ref="p" v-bind:content="post"/>-->
       </template>
       <router-view/>
-      <button class="resetLikes" v-on:click="this.$router.push('/addPost')">Add post</button>
+      <div class="buttonsBot">
+        <button class="resetLikes" v-on:click="this.$router.push('/addPost')">Add post</button>
+        <button class="resetLikes" v-on:click="deleteAll()">Delete all posts</button>
+      </div>
     </div>
     <div class="side"></div>
   </div>
@@ -19,6 +22,7 @@
 
 import Post from "@/components/Post";
 import Footer from "@/components/Footer";
+import {deleteAllPosts} from "@/apiWrappers";
 
 export default {
   name: 'HomeView',
@@ -58,6 +62,10 @@ export default {
             console.log("error logout");
           });
     },
+    deleteAll(){
+      deleteAllPosts()
+      location.assign("/")
+    }
     },
 
 }
@@ -93,9 +101,6 @@ export default {
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.75);
 }
 
-p ~ span {
-  color: red;
-}
 .postHeader {
   display: flex;
   flex-direction: row;
@@ -149,6 +154,12 @@ p ~ span {
   margin: auto;
   width: 100%;
   height: 100%;
+}
+.buttonsBot{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .resetLikes {

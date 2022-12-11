@@ -7,7 +7,7 @@ const {getUsers, getUserByUserId} = require("./services/usersService")
 const {authenticateUser, logoutUser, loginUser, createNewUser} = require("./services/userAuth")
 
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 const app = express();
 
