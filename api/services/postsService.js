@@ -80,4 +80,13 @@ const getPostById = (req, res) => {
     )
 }
 
-module.exports = {getPosts, addPost, getPostById}
+const truncatePostsTable = (req, res) => {
+    pool.query('TRUNCATE TABLE posts', (err, results) => {
+        if (err) {
+            throw err
+        }
+        res.status(200).send("posts table cleared")
+    })
+}
+
+module.exports = {getPosts, addPost, getPostById, truncatePostsTable}

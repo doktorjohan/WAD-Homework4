@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 
-const {addPost, addLikeToPost, getPosts, getPostById} = require("./services/postsService")
+const {addPost, addLikeToPost, getPosts, getPostById, truncatePostsTable} = require("./services/postsService")
 const {getUsers, getUserByUserId} = require("./services/usersService")
 const {authenticateUser, logoutUser, loginUser, createNewUser} = require("./services/userAuth")
 
@@ -32,6 +32,7 @@ app.get('/api/posts/:postId', getPostById)
 app.get('/api/users', getUsers)
 app.get('/api/users/:userId', getUserByUserId)
 app.post('/api/posts', addPost)
+app.delete('/api/posts/delete', truncatePostsTable)
 
 
 app.listen(port, () => {

@@ -71,3 +71,14 @@ export async function addNewPost(postData) {
         })
     return success
 }
+
+export async function deleteAllPosts() {
+    let success = false
+    await fetch("http://localhost:3000/api/posts/delete", {
+        credentials: "include",
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
