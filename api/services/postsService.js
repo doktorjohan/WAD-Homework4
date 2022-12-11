@@ -100,5 +100,23 @@ const deletePostById = (req, res) => {
         })
 }
 
+const updatePost = (req, res) => {
+    const id = req.params.id;
+    const post = req.body;
+    console.log(id)
+    console.log(post)
+    console.log("update request has arrived");
+    pool.query(
+        "UPDATE posts SET post = $2 WHERE id = $1", [id, post.post],
+        (err, results) => {
+            if (err) {
+                throw err
+            }
+            res.status(200).send(results["rows"])
+        });
+}
 
-module.exports = {getPosts, addPost, getPostById, truncatePostsTable, deletePostById}
+
+
+
+module.exports = {getPosts, addPost, getPostById, truncatePostsTable, deletePostById, updatePost}
