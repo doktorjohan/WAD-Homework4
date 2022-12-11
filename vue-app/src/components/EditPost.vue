@@ -7,11 +7,12 @@
         </div>
         <div>
           <label>Body</label>
-          <input type="text" required v-model="postBody" placeholder="Post body">
+          <input type="text" required v-model="post.post" placeholder="Post body">
         </div>
         <div class="buttons">
-          <input class="button" type="submit" value="Update">
-          <button class="button">Delete</button>
+          <button class="button" @click="updatePost">Update</button>
+<!--          <input class="button" type="submit" value="Update">-->
+          <button class="button" @click="deletePost">Delete</button>
         </div>
       </form>
     </div>
@@ -23,9 +24,58 @@ export default {
   name: "EditPost",
   data() {
     return {
-      postBody: ""
-    }
-  }
+      post: {
+
+        id: "",
+        post: "",
+        created_at: "",
+        likes: "",
+        user_id: "",
+        image_link: "",
+      }
+    };
+  },
+  methods: {
+    fetchAPost(id) {
+      fetch(`http://localhost:3000/api/posts/${id}`)
+          .then((response) => response.json())
+          .then((data) => (this.post = data[0]))
+          .catch((err) => console.log(err.message));
+    },
+    updatePost() {
+      fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.post),
+      })
+          .then((response) => {
+            console.log(response.data);
+            this.$router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+    deletePost() {
+      fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+          .then((response) => {
+            console.log(response.data);
+            this.$router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+  },
+  mounted() {
+    this.fetchAPost(this.$route.params.id);
+  },
+
 }
 </script>
 

@@ -3,9 +3,11 @@
     <div class="side"></div>
     <div id="feed">
       <button class="logout" @click="Logout">Logout</button>
-      <template v-for="post in postsList" :key="post.id">
-        <Post v-on:click.native="editPost" ref="p" v-bind:content="post"/>
+      <template v-for="post in postsList" :key="post.postId">
+        <Post v-on:click.native="editPost(post.postId)" ref="p" v-bind:content="post"/>
+<!--        <Post ref="p" v-bind:content="post"/>-->
       </template>
+      <router-view/>
       <button class="resetLikes" v-on:click="this.$router.push('/addPost')">Add post</button>
     </div>
     <div class="side"></div>
@@ -22,7 +24,9 @@ export default {
   name: 'HomeView',
   components: {Footer, Post},
   data() {
-    return {};
+    return {
+      postsList: []
+    };
   },
   computed: {
     postsList() {
@@ -33,11 +37,9 @@ export default {
     this.$store.dispatch("fetchPosts")
   },
   methods: {
-    ResetLikes: function () {
-      this.$store.commit("resetLikes")
-      },
-    editPost: function () {
-      this.$router.push('/editPost')
+    editPost(id) {
+      console.log(id)
+      this.$router.push('/posts/' + id)
     },
     Logout() {
       fetch("http://localhost:3000/auth/logout", {

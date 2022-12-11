@@ -12,11 +12,13 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    beforeEnter: async(to, from, next) => {
-      let authResult = await auth.authenticated()
+    beforeEnter: async (to, from, next) => {
+      let authResult = await auth.authenticated();
       if (!authResult) {
+        console.log("redirect")
         next('/login')
       } else {
+        console.log("no redirect")
         next()
       }
     }
@@ -36,11 +38,6 @@ const routes = [
     component: LoginView
   },
   {
-    path:'/editPost',
-    name: 'editPost',
-    component: EditPostView
-  },
-  {
     path: '/addPost',
     name: 'addPost',
     component: AddPostView
@@ -49,7 +46,12 @@ const routes = [
     path: '/contacts',
     name: 'contacts',
     component: ContactView
-  }
+  },
+  {
+    path: "/posts/:id",
+    name: 'editPost',
+    component: EditPostView
+  },
 ]
 
 const router = createRouter({
